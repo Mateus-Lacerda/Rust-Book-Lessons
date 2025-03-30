@@ -1,4 +1,4 @@
-#![allow(deprecated)]
+#![allow(deprecated, unused_variables)]
 // This will be awesome
 
 // Variables are immutable by default
@@ -155,6 +155,46 @@ fn charring() {
 }
 
 
+// Compound types
+// They group multiple values into one type 
+
+// The tuple
+// General way of grouping different values
+// Allow different types
+// Are a default in Rust, unlike C
+fn the_tup() {
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+    // Deconstructing the tuple into many variables
+    let (x, y, z) = tup;
+    println!("The value of y is: {y}");
+    // Access a value directly
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let five_hundred = x.0;
+    println!("{five_hundred}");
+
+    let six_p_four = x.1;
+    println!("{six_p_four}");
+
+    let one = x.2;
+    println!("{one}");
+
+
+    // The unit
+    // Functions without return, return this
+    // Like this one
+    let the_unit = ();
+}
+
+// The almighty Array
+fn the_array() {
+    let a = [1, 2, 3, 4, 5];
+    // for loop just like Python
+    for number in a {
+        println!("{number}")
+    }
+}
+
 pub fn run_book_lessons(){
     println!("\nRunning book lessons");
     immutable_variables();
@@ -166,5 +206,7 @@ pub fn run_book_lessons(){
     make_the_calcs();
     let_the_bools_cook();
     charring();
+    the_tup();
+    the_array();
 }
 
