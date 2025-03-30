@@ -53,7 +53,11 @@ pub fn setup() {
     search_dumb(arr_to_search, visited, (0,0), 0, 1);
 }
 
+
 // This dumb func aims to search an entire matrix to find out how many ones there are
+// This search is completely broken, but it's kind of fun
+// It's actually kinda hard to not keep the agent stuck
+// There should be a better implementation
 fn search_dumb(
     arr_to_search: [[u32; 10];10],
     mut visited:[[u32; 10];10],
@@ -61,10 +65,14 @@ fn search_dumb(
     ones_count:u8,
     visited_count:u8
 ){
-    print_visited(arr_to_search, current_position);
+    print_visited(visited, current_position);
     if visited_count == 1 && arr_to_search[0][0] == 1 {
         search_dumb(arr_to_search, visited, current_position, ones_count+1, visited_count);
     }
+
+    // Check if we're stuck
+    
+
     if visited_count >= 100 {
         println!("{ones_count} one were found.");
         return;
