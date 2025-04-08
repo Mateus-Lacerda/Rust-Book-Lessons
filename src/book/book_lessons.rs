@@ -186,13 +186,154 @@ fn the_tup() {
     let the_unit = ();
 }
 
-// The almighty Array
+// The Array
+// Allocated in the stack
+// What does that even mean???
+// More useful when the number of elements is not suposed to change
 fn the_array() {
     let a = [1, 2, 3, 4, 5];
     // for loop just like Python
     for number in a {
         println!("{number}")
     }
+
+    // Typing the array: [<type>;len]
+    let b: [i8; 4] = [-1, 0, 3, 42];
+    for number in b {
+        println!("{number}")
+    }
+
+    // Specify the value that you want repeated
+    // arr = [<element to repeat>;<lenght>]
+    // 4 42's in sequence
+    let fourty_twos = [42;4];
+    for fourty_two in fourty_twos {
+        println!("{fourty_two}")
+    }
+    // accessing an element
+    let fst_42 = fourty_twos[0];
+    let lst_42 = fourty_twos[3]; // Cant use -1
+
+    // If you try to acces an invalid element 
+    // Doesn't compile
+    // If index is not known at compile time (user input)
+    // Panic !!!
+    //
+    // Other compiled languages let you access the suposed data
+    // Which can result in memory unsafety
+
+}
+
+// Functions
+// Main is the entrypoint, must normally be present
+// Naming is in snake_case
+// No need for return statement, just place the variable lmao
+fn get_me_the_value_of(x: i8) -> i8 {x}
+
+//Statements are instructions that perform some action and do not return a value.
+//Expressions evaluate to a resultant value. Let’s look at some examples.
+fn statements_and_instructions() { // The function's definition is a statement
+    let y = 6; // Statement
+    println!("{y}");
+    // Statements don't return values, hence:
+    // let x = (let y = 6); // Does not compile
+    // Python is laughing right now
+    let x = {
+        let k = 10;
+        k + 1 // Semicolon is not allowed here, since it is interpreted as a statement
+    };
+    println!("The value of x is {x}");
+}
+
+// Comments (This is a comment)
+
+// Control flow
+// Loops and ifs
+fn out_of_control_flow() {
+    let x = "dumb";
+    // If statements
+    if x == "smart" {
+        println!("Smart")
+    } else if x == "normal" {
+        println!("Normal")
+    } else if x == "dumb" {
+        println!("Dumb, as expected")
+    } else {
+        println!("What")
+    }
+    // Using if is let statement
+    // Very Pythonic indeed
+    let dumb = true;
+    let smart = if dumb { "dumb" } else { "smart" };
+    // Values in ifs in lets must have same type
+    // This does NOT compile:
+    //    let condition = true;
+    //
+    //    let number = if condition { 5 } else { "six" };
+    //
+    //    println!("The value of number is: {number}");
+
+    // Loops
+    let mut counter = 0;
+    // Basically a nice old while true
+    loop {
+        if counter == 5 {break};
+        println!("again");
+        counter += 1;
+    }
+    // Loops may calculate stuff, and therefore return stuff:
+    let mut number = 0;
+    let result = loop {
+        number += 1;
+
+        if number == 10 {
+            break number * 2;
+        }
+    };
+    println!("{number}"); // Must be 20
+}
+
+// WARNING: Very cool stuff ahead
+// Labelling loops
+fn loop_labeling() {
+    let mut count = 0;
+    'counting_up: loop {
+        println!("count = {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {remaining}");
+            if remaining == 9 {break};
+            if count == 2 {break 'counting_up};
+            remaining -= 1;
+        }
+        count += 1;
+    }
+    println!("End count = {count}")
+}
+
+// While 
+fn the_while_loop() {
+    let mut number = 3;
+    
+    while number != 0 {
+        println!("{number}");
+        number -= 1;
+    }
+    println!("LISTOFF");
+    let a = [10, 20, 30, 40, 50];
+    let mut index = 0;
+
+    while index < 5 {
+        println!("the value is: {}", a[index]);
+
+        index += 1;
+    } // This, apparently, is very dangerous
+
+    for element in a {
+        println!("{element}") // Much simple imo
+    }
+    
 }
 
 pub fn run_book_lessons(){
@@ -208,5 +349,10 @@ pub fn run_book_lessons(){
     charring();
     the_tup();
     the_array();
+    let _x = get_me_the_value_of(10);
+    statements_and_instructions();
+    out_of_control_flow();
+    loop_labeling();
+    the_while_loop();
 }
 
