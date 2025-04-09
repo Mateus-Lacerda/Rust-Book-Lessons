@@ -333,7 +333,12 @@ fn the_while_loop() {
     for element in a {
         println!("{element}") // Much simple imo
     }
-    
+
+    // Range
+    for number in (1..4).rev() {
+        println!("{number}!");
+    }
+    println!("LIFTOFF!!!");
 }
 
 pub fn run_book_lessons(){
